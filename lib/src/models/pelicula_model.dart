@@ -1,6 +1,6 @@
 class Peliculas {
 
-  List<Pelicula> items = new List();
+  List<Pelicula> items = [];
 
   Peliculas();
 
@@ -74,6 +74,14 @@ class Pelicula {
       return 'https://www.eduprizeschools.net/wp-content/uploads/2016/06/No_Image_Available.jpg';
     } else {
       return 'https://image.tmdb.org/t/p/w500/$posterPath';
+    }
+  }
+
+  getBackgroundImg() {
+    if ( backdropPath == null ) {
+      return 'https://www.eduprizeschools.net/wp-content/uploads/2016/06/No_Image_Available.jpg';
+    } else {
+      return 'https://image.tmdb.org/t/p/w500/$backdropPath';
     }
   }
 
