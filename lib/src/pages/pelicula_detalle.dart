@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:peliculas/src/models/actores_model.dart';
 import 'package:peliculas/src/models/pelicula_model.dart';
+import 'package:peliculas/src/models/peliculas_videos.dart';
 import 'package:peliculas/src/providers/peliculas_providers.dart';
 import 'package:share/share.dart';
 
@@ -57,12 +58,15 @@ class PeliculaDetalle extends StatelessWidget {
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Row(
         children: [
-          ClipRRect(
-              borderRadius: BorderRadius.circular(20.0),
-              child: Image(
-                image: NetworkImage(pelicula.getPosterImg()),
-                height: 150.0,
-              )
+          Hero(
+            tag: pelicula.uniqueId,
+            child: ClipRRect(
+                borderRadius: BorderRadius.circular(20.0),
+                child: Image(
+                  image: NetworkImage(pelicula.getPosterImg()),
+                  height: 150.0,
+                )
+            ),
           ),
           SizedBox(width: 20.0),
           Flexible(
@@ -113,7 +117,7 @@ class PeliculaDetalle extends StatelessWidget {
       future: peliProvider.getVideos(pelicula),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.hasData) {
-          return _floatingButton(context, snapshot.data[0].key);
+          return _floatingButton(context, snapshot.data[0]);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -121,8 +125,8 @@ class PeliculaDetalle extends StatelessWidget {
     );
   }
 
-  Widget _floatingButton(BuildContext context, peli) {
-    String text = 'https://www.youtube.com/watch?v=$peli';
+  Widget _floatingButton(BuildContext context, PeliculaVideo peli) {
+    // String text = 'https://www.youtube.com/watch?v=$peli';
     String subject = 'Follow me';
     return FloatingActionButton(
       child: Icon(Icons.share),
@@ -130,7 +134,7 @@ class PeliculaDetalle extends StatelessWidget {
       onPressed: () {
         final RenderBox box = context.findRenderObject();
         Share.share(
-          text,
+          peli.getUrlVideo(),
           subject: subject,
           sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size
         );
