@@ -1,3 +1,9 @@
+
+# Screen capture
+![Screenshot_1642209135](https://user-images.githubusercontent.com/57992471/149603294-c103569c-562d-4534-8b90-12e3a265640c.png)
+![Screenshot_1642209120](https://user-images.githubusercontent.com/57992471/149603315-7ef16b30-1356-4b0d-b9fb-2bc1daa9d39c.png)
+
+
 # Peliculas
 
 A new Flutter project.
