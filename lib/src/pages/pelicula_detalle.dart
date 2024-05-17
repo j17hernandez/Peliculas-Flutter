@@ -135,7 +135,6 @@ class PeliculaDetalle extends StatelessWidget {
   }
 
   Widget _floatingButton(BuildContext context, PeliculaVideo peli) {
-    // String text = 'https://www.youtube.com/watch?v=$peli';
     String subject = 'Follow me';
     return FloatingActionButton(
       child: Icon(Icons.share),
