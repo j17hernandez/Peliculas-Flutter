@@ -1,54 +1,52 @@
 class PeliculasVideo {
-
   List<PeliculaVideo> items = [];
 
   PeliculasVideo();
 
-  PeliculasVideo.fromJsonList( List<dynamic> jsonList ) {
-    if ( jsonList == null ) return;
+  PeliculasVideo.fromJsonList(List<dynamic> jsonList) {
+    if (jsonList == null) return;
 
-    for ( var item in jsonList ) {
+    for (var item in jsonList) {
       final pelicula = new PeliculaVideo.fromJsonMap(item);
-      items.add( pelicula );
+      items.add(pelicula);
     }
   }
-
 }
 
 class PeliculaVideo {
-  String id;
-  String iso6391;
-  String iso31661;
-  String key;
-  String name;
-  String site;
-  int size;
-  String type;
+  late String id;
+  late String? iso6391;
+  late String? iso31661;
+  late String key;
+  late String name;
+  late String site;
+  late int size;
+  late String type;
 
   PeliculaVideo({
-    this.id,
+    required this.id,
     this.iso6391,
     this.iso31661,
-    this.key,
-    this.name,
-    this.site,
-    this.size,
-    this.type,
+    required this.key,
+    required this.name,
+    required this.site,
+    required this.size,
+    required this.type,
   });
 
-  PeliculaVideo.fromJsonMap( Map<String, dynamic> json ) {
-    id                    = json['id'].toString();
-    iso6391               = json['iso6391'];
-    iso31661              = json['iso31661'];
-    key                   = json['key'].toString();
-    name                  = json['name'];
-    site                  = json['site'];
-    size                  = json['size'];
-    type                  = json['type'];
+  PeliculaVideo.fromJsonMap(Map<String, dynamic> json) {
+    id = json['id'].toString();
+    iso6391 = json['iso6391'];
+    iso31661 = json['iso31661'];
+    key = json['key'].toString();
+    name = json['name'];
+    site = json['site'];
+    size = json['size'];
+    type = json['type'];
   }
 
   getUrlVideo() {
-    if ( key != null ) {
+    if (key != null) {
       return 'https://www.youtube.com/watch?v=$key';
     }
   }

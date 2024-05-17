@@ -63,24 +63,23 @@ class DataSearch extends SearchDelegate {
       builder: (BuildContext context, AsyncSnapshot<List<Pelicula>> snapshot) {
         if (snapshot.hasData) {
           final peliculas = snapshot.data;
-          return ListView(children:
-            peliculas.map((pelicula) {
-              return ListTile(
-                leading: FadeInImage(
-                  image: NetworkImage(pelicula.getPosterImg()),
-                  placeholder: AssetImage('assets/img/no-image.jpg'),
-                  fit: BoxFit.contain,
-                ),
-                title: Text(pelicula.title),
-                subtitle: Text(pelicula.originalTitle),
-                onTap: () {
-                  close(context, null);
-                  pelicula.uniqueId = '${pelicula.id}-buscar';
-                   Navigator.pushNamed(context, 'detalle', arguments: pelicula);
-                },
-              );
-            }).toList()
-          );
+          return ListView(
+              children: peliculas!.map((pelicula) {
+            return ListTile(
+              leading: FadeInImage(
+                image: NetworkImage(pelicula.getPosterImg()),
+                placeholder: AssetImage('assets/img/no-image.jpg'),
+                fit: BoxFit.contain,
+              ),
+              title: Text(pelicula.title),
+              subtitle: Text(pelicula.originalTitle),
+              onTap: () {
+                close(context, null);
+                pelicula.uniqueId = '${pelicula.id}-buscar';
+                Navigator.pushNamed(context, 'detalle', arguments: pelicula);
+              },
+            );
+          }).toList());
         } else {
           return Center(child: CircularProgressIndicator());
         }

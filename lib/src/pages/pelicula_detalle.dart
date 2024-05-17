@@ -10,7 +10,8 @@ class PeliculaDetalle extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final Pelicula pelicula = ModalRoute.of(context).settings.arguments;
+    final Pelicula pelicula =
+        ModalRoute.of(context)!.settings.arguments as Pelicula;
 
     return Scaffold(
         body: CustomScrollView(
@@ -109,7 +110,9 @@ class PeliculaDetalle extends StatelessWidget {
       future: peliProvider.getCast(pelicula.id.toString()),
       builder: (BuildContext context, AsyncSnapshot<List> snapshot) {
         if (snapshot.hasData) {
-          return _crearActoresPageView(snapshot.data);
+          List<Actor> actorsList =
+              snapshot.data!.map((item) => item as Actor).toList();
+          return _crearActoresPageView(actorsList);
         } else {
           return Center(child: CircularProgressIndicator());
         }
@@ -138,15 +141,16 @@ class PeliculaDetalle extends StatelessWidget {
       child: Icon(Icons.share),
       backgroundColor: Colors.redAccent,
       onPressed: () {
-        final RenderBox box = context.findRenderObject();
-        Share.share(peli.getUrlVideo(),
-            subject: subject,
-            sharePositionOrigin: box.localToGlobal(Offset.zero) & box.size);
+        Share.share(
+          peli.getUrlVideo(),
+          subject: subject,
+        );
       },
     );
   }
 
   Widget _crearActoresPageView(List<Actor> actores) {
+    print('actores: ${actores.length}');
     return SizedBox(
       height: 200.0,
       child: PageView.builder(

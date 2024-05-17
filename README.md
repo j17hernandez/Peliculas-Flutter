@@ -25,3 +25,12 @@ samples, guidance on mobile development, and a full API reference.
 ## Change icon app
 
 in console run the code ## flutter pub run flutter_launcher_icons:main
+
+
+# Clear Dependencies and Gradle
+cd android && ./gradlew clean
+fvm flutter clean
+
+
+# Install all packages
+fvm flutter pub get
